@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/16848/CLionProjects/lProject/untitled/Graph.cpp
-Graph.h
-C:/Users/16848/CLionProjects/lProject/untitled/Graph.h
-set
--
-fstream
--
-string
--
-iostream
--
-math.h
--
-stdlib.h
--
-
 C:/Users/16848/CLionProjects/lProject/untitled/Graph.h
 Node.h
 C:/Users/16848/CLionProjects/lProject/untitled/Node.h
@@ -43,10 +27,6 @@ unistd.h
 -
 sstream
 -
-
-C:/Users/16848/CLionProjects/lProject/untitled/Node.cpp
-Node.h
-C:/Users/16848/CLionProjects/lProject/untitled/Node.h
 
 C:/Users/16848/CLionProjects/lProject/untitled/Node.h
 set
@@ -82,8 +62,6 @@ string
 stdio.h
 -
 vector
--
-thread
 -
 fstream
 -
