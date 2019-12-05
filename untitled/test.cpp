@@ -2,18 +2,37 @@
 // Created by WQSDP2019 on 2019/12/5.
 //
 #include <iostream>
+using namespace std;
 int main()
 {
-    using namespace std;
+
     cout << "HelloWorld\n";
-    int * a = new int [100];
-    cout<< sizeof(a)<<endl;
-    for (int i = 0; i < 50; ++i) {
-        a[i]=i;cout<<"a["<<i<<"]:"<<a[i]<<"";
+    int b = 30;
+    int *a = &b;
+    cout<<"a:"<<a<<"*a:"<<*a<<endl;
+    int ** p =&a;
+    cout<<"p:"<<p<<"*p:"<<*p<<"**p"<<**p;
+
+    char* ss[]= {"2","2","3"};
+    cout<<endl<< "ss_length:"<<sizeof(ss)<< "\t*ss_length:"<<sizeof(*ss);
+
+    for (int i = 0; i < sizeof(ss)/ sizeof(*ss); ++i) {
+        cout<<endl<<"ss["<<i<<"]:"<<ss[i]<<endl;
     }
-    cout<<endl<< sizeof(a);
-    //cout << endl;
-    cout << "2333";
-    return 0;
+
+    char * asc[] = {"1","2","3"};
+    char ** ppp=    asc;
+    for (int j = 0; j < sizeof(asc)/ sizeof(*asc); ++j) {
+        cout<<ppp[j]<<" ";
+    }
+    char *str = "china";
+    while(*str)
+    {
+        std::cout << *str++ << std::endl;
+    }
+
+
+
+
 }
 

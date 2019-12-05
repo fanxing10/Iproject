@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/untitled.dir/Graph.cpp.obj"
   "CMakeFiles/untitled.dir/Node.cpp.obj"
-  "CMakeFiles/untitled.dir/main.cpp.obj"
+  "CMakeFiles/untitled.dir/test.cpp.obj"
   "libuntitled.dll.a"
   "untitled.exe"
   "untitled.exe.manifest"
