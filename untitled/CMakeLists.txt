@@ -3,4 +3,4 @@ project(untitled)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(untitled main.cpp Graph.cpp Node.cpp)
+add_executable(untitled test.cpp Graph.cpp Node.cpp )

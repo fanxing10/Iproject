@@ -1,4 +1,8 @@
 /*
+ * -c 2 -s 6 -model 2 -anode 20
+ *
+ * string data="C:\\Users\\WQSDP2019\\CLionProjects\\Iuntitled\\untitled\\tntp2.txt";
+/*
 随机选择一个节点，基于传播概率反向随机游走，记录游走过节点的次数。
 选出次数最高的k个节点作为种子节点。
 与RIS反向抽样类似的游走，但是不记录抽样样本，只记录游走经过的节点次数。
@@ -48,7 +52,7 @@ bool operator > (Pair a, Pair b)
     return a.value < b.value;
 }
 
-string data="C:\\Users\\16848\\CLionProjects\\lProject\\untitled\\tntp2.txt";
+string data="C:\\Users\\WQSDP2019\\CLionProjects\\Iuntitled\\untitled\\tntp2.txt";
 Graph *g = new Graph(data);
 //int *aai=new int[g->num_nodes];     //存储根据B的游走选出的
 void parseArg(int argn, char ** argv);
@@ -137,7 +141,7 @@ int main(int argn, char ** argv)
     parseArg(argn,argv);
     cout << "--------------------------------------------------------------------------------" << endl;
     cout<<"Program Ends Successfully at: " << currentTimestampStr() << endl;
-    return 0;
+
     delete[] walk_arr;
     delete[] bi_arr;
     delete[] visit;
@@ -151,6 +155,7 @@ int main(int argn, char ** argv)
     //delete[] bstate_arr;
     delete[] aseed_arr;
     delete[] aseed_num;
+    return 0;
 }
 
 void parseArg(int argn, char ** argv)
@@ -343,7 +348,7 @@ void diffusion(int ka,int *aai)
     //      ainf += aactive_size;
     /////////////////////////////////////////////////////b扩散
     // initialize the seed nodes
-    bi_size=sizeof(bi_arr);
+   // bi_size=sizeof(bi_arr);
     b_size = bi_size;          //活动节点数加上当前活动的种子节点 ，也是衡量影响力大小的变量
     bt_size = 0;                      //t+1活动节点为0
 //    randomOrder(brand_arr, bi_size);       //rand_arr为k个种子数组 ，i_size是当前活动节点数量

@@ -33,19 +33,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = C:\Users\16848\Downloads\CLion-2019.3.win\bin\cmake\win\bin\cmake.exe
+CMAKE_COMMAND = "D:\Program Files\JetBrains\CLion 2019.3\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = C:\Users\16848\Downloads\CLion-2019.3.win\bin\cmake\win\bin\cmake.exe -E remove -f
+RM = "D:\Program Files\JetBrains\CLion 2019.3\bin\cmake\win\bin\cmake.exe" -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\16848\CLionProjects\lProject\untitled
+CMAKE_SOURCE_DIR = C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\16848\CLionProjects\lProject\untitled\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/untitled.dir/depend.make
@@ -56,62 +56,62 @@ include CMakeFiles/untitled.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/untitled.dir/flags.make
 
-CMakeFiles/untitled.dir/main.cpp.obj: CMakeFiles/untitled.dir/flags.make
-CMakeFiles/untitled.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\16848\CLionProjects\lProject\untitled\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/untitled.dir/main.cpp.obj"
-	C:\PROGRA~2\CODEBL~1\MinGW\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\untitled.dir\main.cpp.obj -c C:\Users\16848\CLionProjects\lProject\untitled\main.cpp
+CMakeFiles/untitled.dir/test.cpp.obj: CMakeFiles/untitled.dir/flags.make
+CMakeFiles/untitled.dir/test.cpp.obj: ../test.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/untitled.dir/test.cpp.obj"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\untitled.dir\test.cpp.obj -c C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\test.cpp
 
-CMakeFiles/untitled.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled.dir/main.cpp.i"
-	C:\PROGRA~2\CODEBL~1\MinGW\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\16848\CLionProjects\lProject\untitled\main.cpp > CMakeFiles\untitled.dir\main.cpp.i
+CMakeFiles/untitled.dir/test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled.dir/test.cpp.i"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\test.cpp > CMakeFiles\untitled.dir\test.cpp.i
 
-CMakeFiles/untitled.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled.dir/main.cpp.s"
-	C:\PROGRA~2\CODEBL~1\MinGW\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\16848\CLionProjects\lProject\untitled\main.cpp -o CMakeFiles\untitled.dir\main.cpp.s
+CMakeFiles/untitled.dir/test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled.dir/test.cpp.s"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\test.cpp -o CMakeFiles\untitled.dir\test.cpp.s
 
 CMakeFiles/untitled.dir/Graph.cpp.obj: CMakeFiles/untitled.dir/flags.make
 CMakeFiles/untitled.dir/Graph.cpp.obj: ../Graph.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\16848\CLionProjects\lProject\untitled\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/untitled.dir/Graph.cpp.obj"
-	C:\PROGRA~2\CODEBL~1\MinGW\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\untitled.dir\Graph.cpp.obj -c C:\Users\16848\CLionProjects\lProject\untitled\Graph.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/untitled.dir/Graph.cpp.obj"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\untitled.dir\Graph.cpp.obj -c C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\Graph.cpp
 
 CMakeFiles/untitled.dir/Graph.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled.dir/Graph.cpp.i"
-	C:\PROGRA~2\CODEBL~1\MinGW\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\16848\CLionProjects\lProject\untitled\Graph.cpp > CMakeFiles\untitled.dir\Graph.cpp.i
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\Graph.cpp > CMakeFiles\untitled.dir\Graph.cpp.i
 
 CMakeFiles/untitled.dir/Graph.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled.dir/Graph.cpp.s"
-	C:\PROGRA~2\CODEBL~1\MinGW\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\16848\CLionProjects\lProject\untitled\Graph.cpp -o CMakeFiles\untitled.dir\Graph.cpp.s
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\Graph.cpp -o CMakeFiles\untitled.dir\Graph.cpp.s
 
 CMakeFiles/untitled.dir/Node.cpp.obj: CMakeFiles/untitled.dir/flags.make
 CMakeFiles/untitled.dir/Node.cpp.obj: ../Node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\16848\CLionProjects\lProject\untitled\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/untitled.dir/Node.cpp.obj"
-	C:\PROGRA~2\CODEBL~1\MinGW\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\untitled.dir\Node.cpp.obj -c C:\Users\16848\CLionProjects\lProject\untitled\Node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/untitled.dir/Node.cpp.obj"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\untitled.dir\Node.cpp.obj -c C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\Node.cpp
 
 CMakeFiles/untitled.dir/Node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled.dir/Node.cpp.i"
-	C:\PROGRA~2\CODEBL~1\MinGW\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\16848\CLionProjects\lProject\untitled\Node.cpp > CMakeFiles\untitled.dir\Node.cpp.i
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\Node.cpp > CMakeFiles\untitled.dir\Node.cpp.i
 
 CMakeFiles/untitled.dir/Node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled.dir/Node.cpp.s"
-	C:\PROGRA~2\CODEBL~1\MinGW\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\16848\CLionProjects\lProject\untitled\Node.cpp -o CMakeFiles\untitled.dir\Node.cpp.s
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\Node.cpp -o CMakeFiles\untitled.dir\Node.cpp.s
 
 # Object files for target untitled
 untitled_OBJECTS = \
-"CMakeFiles/untitled.dir/main.cpp.obj" \
+"CMakeFiles/untitled.dir/test.cpp.obj" \
 "CMakeFiles/untitled.dir/Graph.cpp.obj" \
 "CMakeFiles/untitled.dir/Node.cpp.obj"
 
 # External object files for target untitled
 untitled_EXTERNAL_OBJECTS =
 
-untitled.exe: CMakeFiles/untitled.dir/main.cpp.obj
+untitled.exe: CMakeFiles/untitled.dir/test.cpp.obj
 untitled.exe: CMakeFiles/untitled.dir/Graph.cpp.obj
 untitled.exe: CMakeFiles/untitled.dir/Node.cpp.obj
 untitled.exe: CMakeFiles/untitled.dir/build.make
 untitled.exe: CMakeFiles/untitled.dir/linklibs.rsp
 untitled.exe: CMakeFiles/untitled.dir/objects1.rsp
 untitled.exe: CMakeFiles/untitled.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\16848\CLionProjects\lProject\untitled\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable untitled.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable untitled.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\untitled.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -124,6 +124,6 @@ CMakeFiles/untitled.dir/clean:
 .PHONY : CMakeFiles/untitled.dir/clean
 
 CMakeFiles/untitled.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\16848\CLionProjects\lProject\untitled C:\Users\16848\CLionProjects\lProject\untitled C:\Users\16848\CLionProjects\lProject\untitled\cmake-build-debug C:\Users\16848\CLionProjects\lProject\untitled\cmake-build-debug C:\Users\16848\CLionProjects\lProject\untitled\cmake-build-debug\CMakeFiles\untitled.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\cmake-build-debug C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\cmake-build-debug C:\Users\WQSDP2019\CLionProjects\Iuntitled\untitled\cmake-build-debug\CMakeFiles\untitled.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/untitled.dir/depend
 

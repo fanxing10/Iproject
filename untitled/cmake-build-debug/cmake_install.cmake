@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/16848/CLionProjects/lProject/untitled
+# Install script for directory: C:/Users/WQSDP2019/CLionProjects/Iuntitled/untitled
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/16848/CLionProjects/lProject/untitled/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/WQSDP2019/CLionProjects/Iuntitled/untitled/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
