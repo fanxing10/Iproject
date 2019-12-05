@@ -1,4 +1,8 @@
 /*
+ * -c 2 -s 6 -model 2 -anode 20
+ *
+ * string data="C:\\Users\\WQSDP2019\\CLionProjects\\Iuntitled\\untitled\\tntp2.txt";
+/*
 随机选择一个节点，基于传播概率反向随机游走，记录游走过节点的次数。
 选出次数最高的k个节点作为种子节点。
 与RIS反向抽样类似的游走，但是不记录抽样样本，只记录游走经过的节点次数。
@@ -37,15 +41,15 @@ using namespace std;
 float SIMILARITY = 0;        //相似性
 struct Pair
 {
-	int key;
-	int value;
-	Pair(int key, int value) :key(key), value(value) {};
+    int key;
+    int value;
+    Pair(int key, int value) :key(key), value(value) {};
 };
 typedef struct Pair Pair;
 //运算符重载，根据value的值来排序
 bool operator > (Pair a, Pair b)
 {
-	return a.value < b.value;
+    return a.value < b.value;
 }
 
 string data="C:\\Users\\liqian\\Desktop\\CV IBM\\tntp2.txt";
@@ -78,7 +82,7 @@ int *ar_arr = new int[g->num_nodes]; // the array of previous active nodes  *
 int ar_size = 0; // the # of previously active nodes
 int *at_arr = new int[g->num_nodes];  // the array of nodes to be active in t+1*
 int at_size = 0; // the # of nodes to be active in t+1
-int *astate_arr = new int[g->num_nodes]; // the state of nodes  *
+int *state_arr = new int[g->num_nodes]; // the state of nodes  *
 int *arand_arr = new int[g->num_nodes]; //the 0 ~ n-1 numbers sorted by random order  *
 int *bi_arr = new int[g->num_nodes]; //the array of current active nodes          *
 int bi_size = 0; // the # of newly active nodes         *
@@ -86,8 +90,10 @@ int *br_arr = new int[g->num_nodes]; // the array of previous active nodes  *
 int br_size = 0; // the # of previously active nodes
 int *bt_arr = new int[g->num_nodes];  // the array of nodes to be active in t+1 *
 int bt_size = 0; // the # of nodes to be active in t+1
-int *bstate_arr = new int[g->num_nodes]; // the state of nodes *
-int *visited = new int[g->num_nodes];  //一次游走中记录节点是否被访问过
+//int *bstate_arr = new int[g->num_nodes]; // the state of nodes *
+int *visit = new int[g->num_nodes];  //一次游走中记录节点是否被访问过
+double aactive_size = 0;     //第二次循环时不再执行此语句
+double bactive_size = 0;
 //int *ai=new int[g->num_nodes];     //存储根据B的游走选出的
 
 
@@ -122,118 +128,109 @@ int *visited = new int[g->num_nodes];  //一次游走中记录节点是否被访
 
 int main(int argn, char ** argv)
 {
-	cout << "Program Start at: " << currentTimestampStr() << endl;
-	cout << "Arguments: ";
-	for(int i = 0; i < argn; i++)
+    cout << "Program Start at: " << currentTimestampStr() << endl;
+    cout << "Arguments: ";
+    memset(state_arr, S_STATE, g->num_nodes * sizeof(int)); // initialize the state array 未激活
+    //  memset(bstate_arr, S_STATE, g->num_nodes * sizeof(int)); // initialize the state array
+    for(int i = 0; i < argn; i++)
     {
-		cout << argv[i]<<" ";
-	}
-	cout << endl;
-	cout << "--------------------------------------------------------------------------------" << endl;
+        cout << argv[i]<<" ";
+    }
+    cout << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
     parseArg(argn,argv);
     cout << "--------------------------------------------------------------------------------" << endl;
     cout<<"Program Ends Successfully at: " << currentTimestampStr() << endl;
     return 0;
     delete[] walk_arr;
-	delete[] bi_arr;
-	delete[] visited;
+    delete[] bi_arr;
+    delete[] visit;
     delete[] ai_arr;
-	delete[] ar_arr;
-	delete[] at_arr;
-	delete[] astate_arr;
-	delete[] arand_arr;
-	delete[] br_arr;
-	delete[] bt_arr;
-	delete[] bstate_arr;
+    delete[] ar_arr;
+    delete[] at_arr;
+    delete[] state_arr;
+    delete[] arand_arr;
+    delete[] br_arr;
+    delete[] bt_arr;
+    //delete[] bstate_arr;
     delete[] aseed_arr;
-	delete[] aseed_num;
+    delete[] aseed_num;
 }
 
 void parseArg(int argn, char ** argv)
 {
-	// the parameters
- //   string data="E:\\data\\NetHEPT.txt";  // the path of the dataset
+    // the parameters
+    //   string data="E:\\data\\NetHEPT.txt";  // the path of the dataset
     int c=0,s=0,anode=0;  //the # of seeds to be found ,a种子数量
-	int model=0;
+    int model=0;
 
     for(int i=0; i<argn; i++)
     {
         if(argv[i] == string("-c"))   //几步邻居之中选
-        	c=atoi(argv[i+1]);
+            c=atoi(argv[i+1]);
         if(argv[i] == string("-s"))    //走几步，也即是时间限制
-        	s=atoi(argv[i+1]);        //atoi:字符串转换成整型数
-		if(argv[i] == string("-model"))
-        	model=atoi(argv[i+1]);  //atof：字符串转换成浮点数，可能是相似性衡量标准
-		if(argv[i] == string("-anode"))   //
-        	anode=atoi(argv[i+1]);       //可能是游走次数
+            s=atoi(argv[i+1]);        //atoi:字符串转换成整型数
+        if(argv[i] == string("-model"))
+            model=atoi(argv[i+1]);  //atof：字符串转换成浮点数，可能是相似性衡量标准
+        if(argv[i] == string("-anode"))   //
+            anode=atoi(argv[i+1]);       //可能是游走次数
     }
     if (c==0)
         ExitMessage("c argument  missing");
-	if(s == 0)
-		ExitMessage("s argument  missing");
-	if(model== 0)
-		ExitMessage("model argument  missing");
-	if(anode == 0)
-		ExitMessage("argument anode missing");
-	cout << "graph " << data << "was built successfully!" << endl;
-	run(c,s,model,anode);    //k表示A种子数量
+    if(s == 0)
+        ExitMessage("s argument  missing");
+    if(model== 0)
+        ExitMessage("model argument  missing");
+    if(anode == 0)
+        ExitMessage("argument anode missing");
+    cout << "graph " << data << "was built successfully!" << endl;
+    run(c,s,model,anode);    //k表示A种子数量
 }
 
 void run(int c,int s,int model,int anode)    //随机游走函数
 {
-	cout << "--------------------------------------------------------------------------------" << endl;
-	cout << "Start Reverse Walk) algorithm" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "Start Reverse Walk) algorithm" << endl;
 //	time_t time_start = time(NULL);
-	cout << "No.\tnegative_influence\tpositive_influence\ttime(s)" << endl;
-	srand((unsigned)time(NULL));
-   // int *bi_arr = new int[g->num_nodes]; //the array of current active nodes         *
-    int node,ka,num,con=0,no=1;             //存储选出的种子个数
-//	int *similarity = new int[g->num_nodes]; //存储节点和种子集合的相似性
-//	delete [] similarity;
-//	int *visited = new int[g->num_nodes];  //一次游走中记录节点是否被访问过
-//    int *walk_arr = new int[g->num_nodes]; //存储游走经过节点的次数
+    cout << "No.\tpositive_influence\tnegative_influence\ttime(s)" << endl;
+    srand((unsigned)time(NULL));
+    int node,ka,num,con=0;             //存储选出的种子个数
     int *ai=new int[g->num_nodes];  //存储根据B的游走选出的
-//	double total_inf = 0;  //影响力
     bi_size = 20; // the # of newly active nodes
     int m=g->num_nodes;
     srand((unsigned)time(NULL));//srand函数是随机数发生器的初始化函数
     for(int i=0; i<g->num_nodes; i++)
     {   //对每个节点初始化
-	    walk_arr[i] = 0;
-//		similarity[i] = 0;
-		visited[i] = 0;   //标记
-	}
+        walk_arr[i] = 0;
+        visit[i] = 0;   //标记
+    }
     for(int i=0;i<bi_size;i++)
-	{
+    {
         node=rand()%m;  //给B种子赋初值
-        visited[node] = 1;    //标记
+        visit[node] = 1;    //标记
         //bseed.push(node);
         bi_arr[i]=node;
+        bactive_size++;
     }
-    /*
-    cout<<"please input c nei:"<<endl;
-    cin>>c;
-    cout<<"please input s step :"<<endl;
-    cin>>s;
-    cout<<"please input model:"<<endl;
-    cin>>model;
-    cout<<"please input node num of A party:"<<endl;
-    cin>>anode;*/
-    for(int i=0;i<s;i++)
+    for(int k=0;k<s;k++)  //对步数的循环
     {
         switch(model)
         {
-            case 1: num=distributor1(s,i,con,anode);con=con+num;break;
-            case 2: num=distributor2(s,i,con,anode);con=con+num;break;
-            case 3: num=distributor3(s,i,con,anode);con=con+num;break;
-            case 4: num=distributor4(s,i,con,anode);con=con+num;break;
-            case 5: num=distributor5(s,i,con,anode);con=con+num;break;
+            case 1: num=distributor1(s,k,con,anode);con=con+num;break;
+            case 2: num=distributor2(s,k,con,anode);con=con+num;break;
+            case 3: num=distributor3(s,k,con,anode);con=con+num;break;
+            case 4: num=distributor4(s,k,con,anode);con=con+num;break;
+            case 5: num=distributor5(s,k,con,anode);con=con+num;break;
         }
-  //      cout<<"****************"<<endl;
- //       ai=select(c,num,bi_arr,bi_size);
+        //      cout<<"****************"<<endl;
+        //       ai=select(c,num,bi_arr,bi_size);
         //select(c,num,bi_arr,bi_size);
         for(int i=0; i<bi_size; i++)
-        bseed.push(bi_arr[i]);
+        {
+            bseed.push(bi_arr[i]);
+            cout<<bi_arr[i]<<"\t";
+        }
+        cout<<endl<<endl;
         int t_pair;
         for(int i=0; i<bi_size; i++)
         {
@@ -243,28 +240,34 @@ void run(int c,int s,int model,int anode)    //随机游走函数
         }
         for(int i = 0; i < g->num_nodes; i++)
         {
-		   Pair m_pair(i,walk_arr[i]);
-	       tmp_pqueue.push(m_pair);  //用来存储此节点被经过了几次
+            Pair m_pair(i,walk_arr[i]);
+            tmp_pqueue.push(m_pair);  //用来存储此节点被经过了几次
         }
-	    for(int i=0; i<num; i++)//选k个种子节点
-	    {
-		   Pair s_pair = tmp_pqueue.top();
-		   tmp_pqueue.pop();
-           aseed_arr[i] = s_pair.key;  //把此节点加入种子数组
-           aseed_num[i] = s_pair.value;   //存储此种子被经过了几次
-	    }
+        for(int i=0; i<num; i++)//选k个种子节点
+        {
+
+            Pair s_pair = tmp_pqueue.top();
+            tmp_pqueue.pop();
+            while(state_arr[s_pair.key]!=S_STATE)
+            {
+                s_pair = tmp_pqueue.top();
+                tmp_pqueue.pop();
+            }
+            aseed_arr[i] = s_pair.key;  //把此节点加入种子数组
+            aseed_num[i] = s_pair.value;   //存储此种子被经过了几次
+            cout<<aseed_arr[i]<<"\t";
+        }
         ka=num;   //需要选的种子节点数目
-        cout << no << "\t\t";
+        cout <<k+1<< "\t\t";
         ai=aseed_arr;
         diffusion(ka,ai);
-        no++;
     }
     delete[] ai;
 }
 
 
 void select(int cc,int t_pair)   //选出at_arr，即下一步可以选为种子节点的，然后把选出的加入正在活动节点
-	//结束条件多样化，可以考虑基于网络规模直接给出,或者指数增加游走次数
+//结束条件多样化，可以考虑基于网络规模直接给出,或者指数增加游走次数
 {
     int k_out,*point,k_out1,*point1;
     if(cc==1)
@@ -286,54 +289,43 @@ void select(int cc,int t_pair)   //选出at_arr，即下一步可以选为种子
             t_pair=point[j];
             select(cc-1,t_pair);
         }
-        cc--;
+        //cc--;
     }
 }
 
 void diffusion(int ka,int *aai)
 {
- /*   int *ai_arr = new int[g->num_nodes]; //the array of current active nodes
-    int *ar_arr = new int[g->num_nodes]; // the array of previous active nodes
-    int *at_arr = new int[g->num_nodes];  // the array of nodes to be active in t+1
-    int *astate_arr = new int[g->num_nodes]; // the state of nodes
-    int *arand_arr = new int[g->num_nodes]; //the 0 ~ n-1 numbers sorted by random order
-    int *br_arr = new int[g->num_nodes]; // the array of previous active nodes
-    int *bt_arr = new int[g->num_nodes];  // the array of nodes to be active in t+1
-    int *bstate_arr = new int[g->num_nodes]; // the state of nodes
-*/
     int b_size;       //随机游走选出的b的种子节点的大小
-	srand((unsigned)time(NULL));
-	memset(astate_arr, S_STATE, g->num_nodes * sizeof(int)); // initialize the state array 未激活
-	memset(bstate_arr, S_STATE, g->num_nodes * sizeof(int)); // initialize the state array
-    double aactive_size = 0;     //第二次循环时不再执行此语句
-    double bactive_size = 0;
+    srand((unsigned)time(NULL));
+//	memset(astate_arr, S_STATE, g->num_nodes * sizeof(int)); // initialize the state array 未激活
+//	memset(bstate_arr, S_STATE, g->num_nodes * sizeof(int)); // initialize the state array
     // initialize the seed nodes
     for(int i = 0; i < ka; i++)              //初始化种子节点
     {
         ai_arr[ai_size++] = aai[i];       //当前活动的种子节点被赋值作为种子节点,加上上一轮循环选出的激活节点，成为新的激活种子
-        astate_arr[ai_arr[i]] = I_STATE;        // 改变种子节点的状态 ，已激活
+        state_arr[ai_arr[i]] = I_STATE;        // 改变种子节点的状态 ，已激活
         aactive_size++;
     }
-        //权重级联模型
+    //权重级联模型
     at_size = 0;                      //t+1活动节点为0
     //randomOrder(arand_arr, ai_size);       //rand_arr为k个种子数组 ，i_size是当前活动节点数量
     for(int i = 0; i < ai_size; i++)         //对当前活动节点的循环， 激活活动节点的邻居，计算t+1时刻激活的节点。
-			                                             //即完成当前活动节点在下一步对邻居的激活
+        //即完成当前活动节点在下一步对邻居的激活
     {
         int ai_node = ai_arr[i];                    //把第i个活动节点赋值给本循环中要用到的变量i-node
         int ak_out = g->node_array[ai_node].k_out;     //第i个活动节点的出度赋值给k_out
         for(int j = 0; j < ak_out; j++)              //对第i个活动节点的邻居进行循环
         {
             int neigh = g->node_array[ai_node].id_array[j];    // neigh表示为第i个活动节点的第j个邻居
-            if (astate_arr[neigh] == S_STATE)                    //如果此邻居是未激活的
+            if (state_arr[neigh] == S_STATE)                    //如果此邻居是未激活的
             {
                 int k_in = g->node_array[neigh].k_in;           //则把此邻居的入度赋值给k_in
-                    // double pp = 1.0 / k_in;  //激活概率为入度的倒数  重力级联模型
+                // double pp = 1.0 / k_in;  //激活概率为入度的倒数  重力级联模型
                 double pp = p;      //独立级联模型   pp是成功概率
                 double rand_float = ((double)rand()) / RAND_MAX;//生成0到1之间的随机数 表示激活概率
-                if(rand_float < pp)                           //激活概率小于成功概率，则表示激活
+                if(rand_float > pp)                           //激活概率小于成功概率，则表示激活
                 {
-                    astate_arr[neigh] = SI_STATE;               //改变活动节点的邻居neigh的状态为下一步激活，实质的扩散
+                    state_arr[neigh] = SI_STATE;               //改变活动节点的邻居neigh的状态为下一步激活，实质的扩散
                     at_arr[at_size++] = neigh;                   //加入到下一步激活的数组里，si_size只记录每一次扩散t+1时刻激活的num
                 }
             }
@@ -341,40 +333,40 @@ void diffusion(int ka,int *aai)
     }
     for(int i = 0; i < ai_size; i++)                 //加入到过去激活的数组里
     {    //i即当前轮节点激活过程结束，变成过去激活节点
-        astate_arr[ai_arr[i]] = R_STATE;          //设置节点状态为激活过
+        state_arr[ai_arr[i]] = R_STATE;          //设置节点状态为激活过
         ar_arr[ar_size++] = ai_arr[i];               // 加入到先前激活的数组中
     }
     ai_size = 0;                    //t时刻活动数量为0
     for(int i = 0; i < at_size; i++)     //对t+1时刻活动节点的遍历
     {  //i+1即刚激活的节点准备去激活其他节点
-        astate_arr[at_arr[i]] = I_STATE;   //设置状态为激活
+        state_arr[at_arr[i]] = I_STATE;   //设置状态为激活
         ai_arr[ai_size++] = at_arr[i];     //加入到现在激活的数组中
         aactive_size++;
     }
- //      ainf += aactive_size;
-  /////////////////////////////////////////////////////b扩散
-		// initialize the seed nodes
+    //      ainf += aactive_size;
+    /////////////////////////////////////////////////////b扩散
+    // initialize the seed nodes
     bi_size=sizeof(bi_arr);
     b_size = bi_size;          //活动节点数加上当前活动的种子节点 ，也是衡量影响力大小的变量
     bt_size = 0;                      //t+1活动节点为0
 //    randomOrder(brand_arr, bi_size);       //rand_arr为k个种子数组 ，i_size是当前活动节点数量
     for(int i = 0; i < bi_size; i++)         //对当前活动节点的循环， 激活活动节点的邻居，计算t+1时刻激活的节点。
-			                                             //即完成当前活动节点在下一步对邻居的激活
+        //即完成当前活动节点在下一步对邻居的激活
     {
         int bi_node = bi_arr[i];                    //把第i个活动节点赋值给本循环中要用到的变量i-node
         int bk_out = g->node_array[bi_node].k_out;    //第i个活动节点的出度赋值给k_out
         for(int j = 0; j < bk_out; j++)              //对第i个活动节点的邻居进行循环
         {
             int neigh = g->node_array[bi_node].id_array[j];    // neigh表示为第i个活动节点的第j个邻居
-            if (bstate_arr[neigh] == S_STATE)                    //如果此邻居是未激活的
+            if (state_arr[neigh] == S_STATE)                    //如果此邻居是未激活的
             {
                 int k_in = g->node_array[neigh].k_in;           //则把此邻居的入度赋值给k_in
                 //double pp = 1.0 / k_in;  //激活概率为入度的倒数  重力级联模型
                 double pp = p;      //独立级联模型   pp是成功概率
                 double rand_float = ((double)rand()) / RAND_MAX;//生成0到1之间的随机数 表示激活概率
-                if(rand_float < pp)                           //激活概率小于成功概率，则表示激活
+                if(rand_float >pp)                           //激活概率小于成功概率，则表示激活
                 {
-                    bstate_arr[neigh] = SI_STATE;               //改变活动节点的邻居neigh的状态为下一步激活，实质的扩散
+                    state_arr[neigh] = SI_STATE;               //改变活动节点的邻居neigh的状态为下一步激活，实质的扩散
                     bt_arr[bt_size++] = neigh;                   //加入到下一步激活的数组里，si_size只记录每一次扩散t+1时刻激活的num
                 }
             }
@@ -382,65 +374,57 @@ void diffusion(int ka,int *aai)
     }
     for(int i = 0; i < bi_size; i++)                 //加入到过去激活的数组里
     {    //i即当前轮节点激活过程结束，变成过去激活节点
-        bstate_arr[bi_arr[i]] = R_STATE;          //设置节点状态为激活过
+        state_arr[bi_arr[i]] = R_STATE;          //设置节点状态为激活过
         br_arr[br_size++] = bi_arr[i];               // 加入到先前激活的数组中
     }
     bi_size = 0;                    //t时刻活动数量为0
     for(int i = 0; i < bt_size; i++)     //对t+1时刻活动节点的遍历
     {  //i+1即刚激活的节点准备去激活其他节点
-        bstate_arr[bt_arr[i]] = I_STATE;   //设置状态为激活
+        state_arr[bt_arr[i]] = I_STATE;   //设置状态为激活
         bi_arr[bi_size++] = bt_arr[i];     //加入到现在激活的数组中
         bactive_size++;
     }
     bactive_size+=b_size;
     cout << aactive_size << "\t\t\t" <<bactive_size << "\t\t\t" << currentTimestampStr() <<endl;
-/*	delete[] ai_arr;
-	delete[] ar_arr;
-	delete[] at_arr;
-	delete[] astate_arr;
-	delete[] arand_arr;
-	delete[] br_arr;
-	delete[] bt_arr;
-	delete[] bstate_arr;
-*/
+    cout<<"************************************************************"<<endl;
 }
 
 int distributor1(int ss,int ii,int ccon,int nodenum)
 {
-     if (ii==0) return nodenum;
-     else return 0;
+    if (ii==0) return nodenum;
+    else return 0;
 }
 int distributor2(int ss,int ii,int ccon,int nodenum)
 {
-     int dis;
-     dis=nodenum/ss;
-     return dis;
+    int dis;
+    dis=nodenum/ss;
+    return dis;
 }
 int distributor3(int ss,int ii,int ccon,int nodenum)    //按照等差数列递增
 {
-     int dis,d;
-     d=(2*(nodenum-ss))/(ss*(ss-1));
-     if (ii==0)  return 1;
-     else
-     {
-         dis=1+(ii*d);
-         return dis;
-     }
+    int dis,d;
+    d=(2*(nodenum-ss))/(ss*(ss-1));
+    if (ii==0)  return 1;
+    else
+    {
+        dis=1+(ii*d);
+        return dis;
+    }
 }
 int distributor4(int ss,int ii,int ccon,int nodenum)
 {
-     int dis;
-     dis=(2*(nodenum-ccon))/(ss-ii);
-     return dis;
+    int dis;
+    dis=(2*(nodenum-ccon))/(ss-ii);
+    return dis;
 }
 int distributor5(int ss,int ii,int ccon,int nodenum)
 {
-     int dis;
-     dis=nodenum/3;
-     if (ii==0) return dis;
-     else if((ii+1)==(ss/2)) return dis;
-     else if(ii==(ss-1))   return dis;
-     else return 0;
+    int dis;
+    dis=nodenum/3;
+    if (ii==0) return dis;
+    else if((ii+1)==(ss/2)) return dis;
+    else if(ii==(ss-1))   return dis;
+    else return 0;
 }
 
 
