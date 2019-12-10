@@ -51,8 +51,8 @@ bool operator > (Pair a, Pair b)
 {
     return a.value < b.value;
 }
-
-string data="C:\\Users\\WQSDP2019\\CLionProjects\\Iuntitled\\untitled\\tntp2.txt";
+string data="C:\\Users\\16848\\CLionProjects\\lProject\\untitled\\tntp2.txt";
+//string data="C:\\Users\\WQSDP2019\\CLionProjects\\Iuntitled\\untitled\\tntp2.txt";
 Graph *g = new Graph(data);
 //int *aai=new int[g->num_nodes];     //存储根据B的游走选出的
 void parseArg(int argn, char ** argv);
